@@ -1,0 +1,36 @@
+version: '2'
+services:
+  db:
+    container_name: mysql
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASS
+      - MYSQL_USER=ttrss
+      - MYSQL_PASSWORD=$DB_PASS
+      - MYSQL_DATABASE=ttrss
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+  php:
+    container_name: php
+    image: php:5-fpm-alpine
+    ports:
+      - "9000:9000"
+    links:
+      - db
+    volumes:
+      - ./html:/var/www/html
+  web:
+    container_name: web
+    image: nginx:stable-alpine
+    ports:
+      - "80:80" 
+    links:
+      - php
+    volumes: 
+      - "./nginx/server.conf:/etc/nginx/conf.d/server.conf:ro"
+volumes:
+  db-data:
+    driver: local
+
