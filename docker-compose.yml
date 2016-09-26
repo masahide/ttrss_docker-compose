@@ -8,15 +8,11 @@ services:
       - MYSQL_USER=ttrss
       - MYSQL_PASSWORD=$DB_PASS
       - MYSQL_DATABASE=ttrss
-    ports:
-      - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
   php:
     container_name: php
     image: php:5-fpm-alpine
-    ports:
-      - "9000:9000"
     links:
       - db
     volumes:
