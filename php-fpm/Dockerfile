@@ -1,5 +1,5 @@
 # vim: set ft=dockerfile:
-FROM  php:alpine
+FROM  php:fpm-alpine
 
 MAINTAINER YAMASAKI Masahide <masahide.y@gmail.com>
 
