@@ -12,7 +12,7 @@ services:
       - db-data:/var/lib/mysql
   php:
     container_name: php
-    image: php:5-fpm-alpine
+    build: php
     links:
       - db
     volumes:
